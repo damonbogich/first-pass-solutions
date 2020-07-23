@@ -1,22 +1,39 @@
-def moving_zeroes(arr):
-    zero_container = []
-    non_zero_container = []
-    
-    for i in range(0, len(arr)):
-        
-        #if array at current index = 0 
-        #remove it and put it into a new array
-        if arr[i] == 0:
-            zero_container.append(arr[i])
-        else:
-            non_zero_container.append(arr[i])
-    #append zero container numbers to arr
-    if len(zero_container) > 0:
-        for i in zero_container:
-            non_zero_container.append(i)
-            arr = non_zero_container
-    
+def product_of_all_other_numbers(arr):
+    #store length of array in variable
+    input_length = len(arr)
+
+    if input_length < 3:
+        arr = arr[::-1]
+        return arr
+
+    else:
+        storage = []
+        for i in range(0, len(arr)):
+            if i == 0: 
+                # we then want to multiply the rest of the values together
+                product = 1
+                for j in range(i + 1, input_length):
+                    # multiply each value until loop is done
+                    next_val = arr[j]
+                    product = product * next_val
+                # set value of current index to product
+                storage.append(product)
+            
+            else: #probably just an else statement
+                compare_index = i - 1
+                product = 1
+                while compare_index >= 0:
+                    product = product * arr[compare_index]
+                    compare_index -= 1 
+
+                for j in range(i + 1, input_length):
+                    next_val = arr[j]
+                    product = product * next_val
+
+                storage.append(product)
+        arr == storage
+
     return arr
 
-arr = [0, 3, 1, 0, -2]
-moving_zeroes(arr)
+inin = [1,2,3,4]
+product_of_all_other_numbers(inin)
