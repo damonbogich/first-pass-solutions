@@ -1,39 +1,25 @@
-def product_of_all_other_numbers(arr):
-    #store length of array in variable
-    input_length = len(arr)
+def sliding_window_max(nums, k):
+    result = []
 
-    if input_length < 3:
-        arr = arr[::-1]
-        return arr
-
-    else:
+    for i in range(0, len(nums) - (k-1)):
+        #populate empty array and find max val
+        #max method
+        current = i
         storage = []
-        for i in range(0, len(arr)):
-            if i == 0: 
-                # we then want to multiply the rest of the values together
-                product = 1
-                for j in range(i + 1, input_length):
-                    # multiply each value until loop is done
-                    next_val = arr[j]
-                    product = product * next_val
-                # set value of current index to product
-                storage.append(product)
+        counter = 0
+        #loop to fill in storage with current val and 
+        #the next (k) values 
+        while current + k - 1 < len(nums) and counter < k:
+            storage.append(nums[i])
+            counter += 1 
+            highest_val = max(storage)
+            i += 1
             
-            else: #probably just an else statement
-                compare_index = i - 1
-                product = 1
-                while compare_index >= 0:
-                    product = product * arr[compare_index]
-                    compare_index -= 1 
+        result.append(highest_val)
 
-                for j in range(i + 1, input_length):
-                    next_val = arr[j]
-                    product = product * next_val
+        
 
-                storage.append(product)
-        arr == storage
 
-    return arr
+    return result
 
-inin = [1,2,3,4]
-product_of_all_other_numbers(inin)
+sliding_window_max([1, 3, -1, -3, 5, 3, 6, 7], 3)
